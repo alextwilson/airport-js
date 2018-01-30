@@ -13,6 +13,10 @@ Airport.prototype.land = function(plane) {
   };
 };
 
-Airport.prototype.take_off = function(plane) {
-  this._hangar.pop(plane);
+Airport.prototype.takeOff = function(plane) {
+  if (this._weatherStation.isStormy()) {
+    throw new Error("Too stormy to take off");
+  } else {
+    this._hangar.pop(plane);
+  };
 };

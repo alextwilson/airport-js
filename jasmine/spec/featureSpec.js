@@ -22,7 +22,7 @@ describe('Airport', function() {
     it('takes off', function() {
       spyOn(airport._weatherStation, 'isStormy').and.returnValue(false);
       airport.land(plane)
-      airport.take_off(plane)
+      airport.takeOff(plane)
       expect(airport._hangar).not.toContain(plane)
     });
   });
@@ -32,6 +32,14 @@ describe('Airport', function() {
       spyOn(airport._weatherStation, 'isStormy').and.returnValue(true);
       var error =  new Error("Too stormy to land");
       expect(function(){ airport.land(plane); }).toThrow(error);
+      airport._weatherStation.isStormy.calls.reset();
+    });
+
+    it('take off', function() {
+      airport.land(plane);
+      spyOn(airport._weatherStation, 'isStormy').and.returnValue(true);
+      var error =  new Error("Too stormy to take off");
+      expect(function(){ airport.takeOff(plane); }).toThrow(error);
     });
   });
 });
