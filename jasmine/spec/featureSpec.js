@@ -12,6 +12,7 @@ describe('Airport', function() {
 
   describe('instruct plane to land', function(){
     it('lands', function() {
+      spyOn(airport._weatherStation, 'isStormy').and.returnValue(false);
       airport.land(plane)
       expect(airport._hangar).toContain(plane)
     });
@@ -19,6 +20,7 @@ describe('Airport', function() {
 
   describe('instruct plane to take off', function(){
     it('takes off', function() {
+      spyOn(airport._weatherStation, 'isStormy').and.returnValue(false);
       airport.land(plane)
       airport.take_off(plane)
       expect(airport._hangar).not.toContain(plane)
@@ -26,7 +28,6 @@ describe('Airport', function() {
   });
 
   describe('if weather is stormy does not let plane', function() {
-
     it('land', function() {
       spyOn(airport._weatherStation, 'isStormy').and.returnValue(true);
       var error =  new Error("Too stormy to land");

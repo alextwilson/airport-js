@@ -3,5 +3,9 @@ function WeatherStation() {
 };
 
 WeatherStation.prototype.isStormy = function() {
-  return false
+  if (Math.random() < 0.7) {
+    return true;
+  } else {
+    return false;
+  }
 };
