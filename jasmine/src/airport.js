@@ -1,17 +1,18 @@
 'use strict';
 
-function Airport() {
+function Airport(weatherStation) {
   this._hangar = [];
+  this._weatherStation = weatherStation
 };
 
 Airport.prototype.land = function(plane) {
-  this._hangar.push(plane);
-  console.log("land plane", plane);
-  console.log(this._hangar);
+  if (this._weatherStation.isStormy()) {
+    throw new Error("Too stormy to land");
+  } else {
+    this._hangar.push(plane);
+  };
 };
 
 Airport.prototype.take_off = function(plane) {
   this._hangar.pop(plane);
-  console.log("Take off plane", plane);
-  console.log(this._hangar);
 };
