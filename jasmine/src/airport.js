@@ -3,6 +3,7 @@
 function Airport(weatherStation) {
   this._hangar = [];
   this._weatherStation = weatherStation
+  this._capacity = 10
 };
 
 Airport.prototype.land = function(plane) {

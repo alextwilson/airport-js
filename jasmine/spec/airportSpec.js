@@ -13,7 +13,6 @@ describe('Airport', function() {
 
   describe('instruct plane to land', function(){
     it('lands', function() {
-      //spyOn(airport._weatherStation, 'isStormy').and.returnValue(false);
       airport.land(plane)
       expect(airport._hangar).toContain(plane)
     });
@@ -21,7 +20,6 @@ describe('Airport', function() {
 
   describe('instruct plane to take off', function(){
     it('takes off', function() {
-      //station.isStormy.and.returnValue(false);
       airport.land(plane)
       airport.takeOff(plane)
       expect(airport._hangar).not.toContain(plane)
@@ -41,6 +39,16 @@ describe('Airport', function() {
       station.isStormy.and.returnValue(true);
       var error =  new Error("Too stormy to take off");
       expect(function(){ airport.takeOff(plane); }).toThrow(error);
+    });
+  });
+
+  describe('airport capacity', function() {
+    it('prevents landing when full', function() {
+      for (var i = 0; i < 10; i++) {
+        airport.land(plane)
+      }
+      var error =  new Error("The airport is full");
+      expect(function(){ airport.land(plane); }).toThrow(error);
     });
   });
 });
