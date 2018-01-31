@@ -1,9 +1,9 @@
 'use strict';
 
-function Airport(weatherStation) {
+function Airport(weatherStation, capacity = 10) {
   this._hangar = [];
   this._weatherStation = weatherStation;
-  this._CAPACITY = 10;
+  this._CAPACITY = capacity;
 };
 
 Airport.prototype.land = function(plane) {

@@ -13,16 +13,16 @@ describe('Airport', function() {
 
   describe('instruct plane to land', function(){
     it('lands', function() {
-      airport.land(plane)
-      expect(airport._hangar).toContain(plane)
+      airport.land(plane);
+      expect(airport._hangar).toContain(plane);
     });
   });
 
   describe('instruct plane to take off', function(){
     it('takes off', function() {
-      airport.land(plane)
-      airport.takeOff(plane)
-      expect(airport._hangar).not.toContain(plane)
+      airport.land(plane);
+      airport.takeOff(plane);
+      expect(airport._hangar).not.toContain(plane);
     });
   });
 
@@ -43,9 +43,18 @@ describe('Airport', function() {
   });
 
   describe('airport capacity', function() {
+    it('defaults to 10', function() {
+      expect(airport._CAPACITY).toEqual(10);
+    });
+
+    it('can be set on creation', function() {
+      var largeAirport = new Airport(station, 15);
+      expect(largeAirport._CAPACITY).toEqual(15);
+    });
+
     it('prevents landing when full', function() {
-      for (var i = 0; i < 10; i++) {
-        airport.land(plane)
+      for (var i = 0; i < airport._CAPACITY; i++) {
+        airport.land(plane);
       }
       var error =  new Error("The airport is full");
       expect(function(){ airport.land(plane); }).toThrow(error);
