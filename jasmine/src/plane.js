@@ -5,7 +5,11 @@ function Plane() {
 };
 
 Plane.prototype.land = function() {
-  this.isFlying = false;
+  if (!this.isFlying) {
+    throw new Error("Cannot land, plane is already landed");
+  } else {
+    this.isFlying = false;
+  };
 };
 
 Plane.prototype.takeOff = function() {

@@ -2,7 +2,7 @@ describe('Plane', function() {
 
   var plane;
 
-  beforeEach(function(){
+  beforeEach(function() {
     plane = new Plane();
   });
 
@@ -19,10 +19,19 @@ describe('Plane', function() {
   });
 
   describe('plane is grounded', function() {
+
+    beforeEach(function() {
+      plane.land()
+    });
+
     it('takes off', function() {
-      plane.land();
       plane.takeOff();
       expect(plane.isFlying).toEqual(true);
+    });
+
+    it('errors if told to land', function() {
+      var error =  new Error("Cannot land, plane is already landed");
+      expect(function(){ plane.land(); }).toThrow(error);
     });
   });
 });
